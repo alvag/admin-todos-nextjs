@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { boolean, object, string } from 'yup';
 
 export async function GET( req: Request ) {
 
@@ -23,11 +24,23 @@ export async function GET( req: Request ) {
     return NextResponse.json( todos );
 }
 
+const postSchema = object( {
+    description: string().required(),
+    completed: boolean().optional().default( false ),
+} );
+
 export async function POST( req: Request ) {
 
-    const body = await req.json();
+    try {
+        const { description, completed } = await postSchema.validate( await req.json() );
 
-    const todo = await prisma.todo.create( { data: body } );
+        const data = { completed, description };
 
-    return NextResponse.json( todo );
+        const todo = await prisma.todo.create( { data } );
+
+        return NextResponse.json( todo );
+    } catch ( error ) {
+        return NextResponse.json( error, { status: 400 } );
+    }
+
 }

@@ -17,6 +17,5 @@ export async function GET( req: Request, { params }: Segments ) {
         return NextResponse.json( { error: 'Todo not found' }, { status: 404 } );
     }
 
-
     return NextResponse.json( todo );
 }
