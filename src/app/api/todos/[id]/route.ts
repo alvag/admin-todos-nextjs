@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { boolean, object, string } from 'yup';
+import { Todo } from '.prisma/client';
 
 interface Segments {
     params: {
@@ -20,6 +22,11 @@ export async function GET( req: Request, { params }: Segments ) {
     return NextResponse.json( todo );
 }
 
+const putSchema = object( {
+    description: string().optional(),
+    completed: boolean().optional(),
+} );
+
 export async function PUT( req: Request, { params }: Segments ) {
     const { id } = params;
 
@@ -29,10 +36,17 @@ export async function PUT( req: Request, { params }: Segments ) {
         return NextResponse.json( { error: 'Todo not found' }, { status: 404 } );
     }
 
-    const data = await req.json();
+    try {
+        const { completed, description } = await putSchema.validate( await req.json() );
 
-    todo = await prisma.todo.update( { where: { id }, data } );
+        const data = { completed, description };
 
-    return NextResponse.json( todo );
+        todo = await prisma.todo.update( { where: { id }, data } );
+
+        return NextResponse.json( todo );
+    } catch ( error ) {
+        return NextResponse.json( error, { status: 400 } );
+    }
+
 
 }
