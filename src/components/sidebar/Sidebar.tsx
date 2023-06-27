@@ -1,18 +1,24 @@
-import { CiBookmarkCheck, CiLogout } from 'react-icons/ci';
+import { CiLogout } from 'react-icons/ci';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SidebarItem } from '@/components';
+import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from 'react-icons/io5';
 
 const menuItems = [
     {
         path: '/dashboard',
-        icon: <CiBookmarkCheck size={ 35 }/>,
+        icon: <IoCalendarOutline size={ 35 }/>,
         title: 'Dashboard'
     },
     {
         path: '/dashboard/rest-todos',
-        icon: <CiBookmarkCheck size={ 35 }/>,
-        title: 'Rest Todos'
+        icon: <IoCheckboxOutline size={ 35 }/>,
+        title: 'Rest TODOS'
+    },
+    {
+        path: '/dashboard/server-todos',
+        icon: <IoListOutline size={ 35 }/>,
+        title: 'Server Actions'
     },
 ]
 

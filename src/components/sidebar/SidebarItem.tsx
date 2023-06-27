@@ -1,11 +1,11 @@
 'use client';
 
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 interface Props {
-    icon: ReactElement;
+    icon: ReactNode;
     title: string;
     path: string;
 }
@@ -16,9 +16,10 @@ export const SidebarItem = ( { icon, title, path }: Props ) => {
     return (
         <li>
             <Link href={ path }
-                  className={ `relative px-4 py-3 flex items-center space-x-4 rounded-xl ${ currentPath === path ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '' }` }>
+                  className={ `relative px-4 py-3 flex items-center space-x-4 rounded-xl hover:bg-gradient-to-r hover:bg-sky-600 hover:text-white 
+                  ${ currentPath === path ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '' }` }>
                 { icon }
-                <span className="-mr-1 font-medium">{ title }</span>
+                <span className="group-hover:text-white-700">{ title }</span>
             </Link>
         </li>
     );
