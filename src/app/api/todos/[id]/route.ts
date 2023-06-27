@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { boolean, object, string } from 'yup';
-import { Todo } from '.prisma/client';
 
 interface Segments {
     params: {
