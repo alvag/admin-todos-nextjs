@@ -2,7 +2,7 @@
 
 import { Todo } from '@prisma/client';
 import { useRouter } from 'next/navigation';
-import { TodoItem } from './TodoItem';
+import { TodoItemExperimental } from './TodoItemExperimental';
 // import { todosHelper } from '@/helpers';
 import { todoActions } from '@/actions'
 
@@ -24,7 +24,8 @@ export const TodosGrid = ( { todos = [] }: Props ) => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {
                 todos?.map( ( todo ) => {
-                    return <TodoItem key={ todo.id } todo={ todo } toggleTodo={ todoActions.toggleTodo }/>
+                    // return <TodoItem key={ todo.id } todo={ todo } toggleTodo={ todoActions.toggleTodo }/>
+                    return <TodoItemExperimental key={ todo.id } todo={ todo } toggleTodo={ todoActions.toggleTodo }/>
                 } )
             }
         </div>
