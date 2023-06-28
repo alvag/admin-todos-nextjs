@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { FC } from 'react';
 import prisma from '@/lib/prisma';
 import { NewTodo, TodosGrid } from '@/components';
