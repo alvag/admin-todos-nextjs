@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import prisma from '@/lib/prisma';
-import { TodosGrid } from '@/components';
+import { NewTodo, TodosGrid } from '@/components';
 
 
 export const metadata = {
@@ -16,6 +16,9 @@ const RestTodosPage: FC<RestTodosProps> = async ( {} ) => {
 
     return (
         <div>
+            <div className="w-full px-3 mx-5 mb-5">
+                <NewTodo/>
+            </div>
             <TodosGrid todos={ todos }/>
         </div>
     );

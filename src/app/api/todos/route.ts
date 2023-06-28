@@ -3,7 +3,6 @@ import prisma from '@/lib/prisma';
 import { boolean, object, string } from 'yup';
 
 export async function GET( req: Request ) {
-
     const { searchParams } = new URL( req.url );
     const take = Number( searchParams.get( 'take' ) || '10' );
     const skip = Number( searchParams.get( 'skip' ) || '0' );
@@ -30,7 +29,6 @@ const postSchema = object( {
 } );
 
 export async function POST( req: Request ) {
-
     try {
         const { description, completed } = await postSchema.validate( await req.json() );
 
@@ -42,5 +40,12 @@ export async function POST( req: Request ) {
     } catch ( error ) {
         return NextResponse.json( error, { status: 400 } );
     }
+}
 
+export async function DELETE( req: Request ) {
+    try {
+        await prisma.todo.deleteMany( { where: { completed: true } } );
+    } catch ( error ) {
+        return NextResponse.json( error, { status: 400 } );
+    }
 }
