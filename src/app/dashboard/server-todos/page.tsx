@@ -6,7 +6,7 @@ import { NewTodo, TodosGrid } from '@/components';
 
 export const metadata = {
     title: 'Server Actions',
-    description: 'Listado de todos consumiendo una API REST',
+    description: 'Listado de todos consumie`ndo una API REST',
 }
 
 interface RestTodosProps {
