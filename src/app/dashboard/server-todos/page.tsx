@@ -4,7 +4,7 @@ import { NewTodo, TodosGrid } from '@/components';
 
 
 export const metadata = {
-    title: 'Listado de Todos',
+    title: 'Server Actions',
     description: 'Listado de todos consumiendo una API REST',
 }
 
@@ -16,7 +16,7 @@ const RestTodosPage: FC<RestTodosProps> = async ( {} ) => {
 
     return (
         <>
-            <div className="text-3xl mb-5">REST Todos</div>
+            <div className="text-3xl mb-5">Server Actions (Alpha)</div>
 
             <div className="w-full px-3 mx-5 mb-5">
                 <NewTodo/>
