@@ -3,6 +3,7 @@
 import { IoTrashOutline } from 'react-icons/io5';
 import { FormEvent, useState } from 'react';
 import { todosHelper } from '@/helpers';
+import { todoActions } from '@/actions';
 import { useRouter } from 'next/navigation';
 
 export const NewTodo = () => {
@@ -16,14 +17,15 @@ export const NewTodo = () => {
 
         if ( description.trim().length === 0 ) return;
 
-        await todosHelper.createTodo( description );
+        // await todosHelper.createTodo( description );
+        await todoActions.createTodo( description );
         setDescription( '' );
-        router.refresh();
+        // router.refresh();
     }
 
     const deleteCompleted = async () => {
-        await todosHelper.deleteCompleted();
-        router.refresh();
+        await todoActions.deleteCompleted();
+        // router.refresh();
     }
 
     return (
