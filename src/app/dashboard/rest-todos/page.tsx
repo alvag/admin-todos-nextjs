@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import prisma from '@/lib/prisma';
 import { NewTodo, TodosGrid } from '@/components';
+import { getUserSessionServer } from '@/auth/actions/auth-actions';
+import { redirect } from 'next/navigation';
 
 
 export const metadata = {
@@ -12,7 +14,18 @@ interface RestTodosProps {
 }
 
 const RestTodosPage: FC<RestTodosProps> = async ( {} ) => {
-    const todos = await prisma.todo.findMany( { orderBy: { description: 'asc' } } );
+    const user = await getUserSessionServer();
+
+    if ( !user ) {
+        redirect( '/api/auth/signin' );
+    }
+
+    const todos = await prisma.todo.findMany( {
+        where: {
+            userId: user.id
+        },
+        orderBy: { description: 'asc' }
+    } );
 
     return (
         <>
