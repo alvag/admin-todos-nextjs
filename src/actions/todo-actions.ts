@@ -21,8 +21,8 @@ export const toggleTodo = async ( id: string, completed: boolean ): Promise<Todo
     return todo;
 }
 
-export const createTodo = async ( description: string ): Promise<Todo> => {
-    const todo = await prisma.todo.create( { data: { description } } );
+export const createTodo = async ( description: string, userId: string ): Promise<Todo> => {
+    const todo = await prisma.todo.create( { data: { description, userId } } );
     revalidatePath( '/dashboard/server-todos' );
     return todo;
 }

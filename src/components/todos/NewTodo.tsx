@@ -17,8 +17,9 @@ export const NewTodo = () => {
 
         if ( description.trim().length === 0 ) return;
 
-        // await todosHelper.createTodo( description );
-        await todoActions.createTodo( description );
+        await todosHelper.createTodo( description );
+        // await todoActions.createTodo( description );
+        router.refresh();
         setDescription( '' );
         // router.refresh();
     }
