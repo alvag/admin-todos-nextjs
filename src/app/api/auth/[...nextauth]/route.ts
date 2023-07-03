@@ -17,6 +17,30 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GITHUB_SECRET ?? '',
         } ),
     ],
+    session: {
+        strategy: 'jwt',
+    },
+    callbacks: {
+        async signIn( { user, account, profile } ) {
+            return true;
+        },
+        async jwt( { token, user, account } ) {
+            const dbUser = await prisma.user.findUnique( {
+                where: { email: token?.email ?? '' },
+            } );
+            token.roles = dbUser?.roles ?? [];
+            token.id = dbUser?.id ?? '';
+
+            return token;
+        },
+        async session( { session, token, user } ) {
+            if ( session && session.user ) {
+                session.user.roles = token.roles;
+                session.user.id = token.id;
+            }
+            return session;
+        },
+    }
 }
 
 const handler = NextAuth( authOptions );

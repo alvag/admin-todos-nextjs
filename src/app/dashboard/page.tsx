@@ -22,6 +22,10 @@ const DashboardPage: FC<DashboardProps> = async ( {} ) => {
                     <span>{ session.user?.email }</span>
                     <span>{ session.user?.image }</span>
                 </div>
+
+                {
+                    JSON.stringify( session )
+                }
             </WidgetItem>
         </div>
     );
